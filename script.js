@@ -1,11 +1,8 @@
-//assigning the list of words to array
-var myWords = ["banana",
-			   "apple",
-			   "gravity",
-			   "years",
-			   "sublime",
-			   "window",
-			   "throat"];
+//assigning the list of words and hints to array
+var myWords = [{ word : "banana", hint : "fruit"},
+			   { word : "three", hint : "number"},
+			   { word : "blue", hint: "color"}
+			   ];
 
 //function to generate random number
 function generateIntRandNumber (max,min) {
@@ -20,7 +17,7 @@ var arrayIndex = generateIntRandNumber(myWords.length,0);
 
 //creating input element
 //generating required number input boxes
-for(var i=0; i<myWords[arrayIndex].length; i++) {
+for(var i=0; i<myWords[arrayIndex].word.length; i++) {
 	var myinput = document.createElement("input");
 	myinput.setAttribute('class','input');
 	myinput.setAttribute('type','text');
@@ -29,6 +26,9 @@ for(var i=0; i<myWords[arrayIndex].length; i++) {
 	inputContainer.appendChild(myinput);
 }
 
+//giving hints to the users
+document.getElementById('hint').innerHTML = (myWords[arrayIndex].hint);
+
 //checking if the user input matches the word from the list
 function check() {
 	var inputText = [];
@@ -36,15 +36,17 @@ function check() {
 
 	for(i = 0; i < inputBoxElements.length; i++) {
     	inputText[i] = inputBoxElements[i].value;
-    }
+	}
 
     //joining the letters from input box to form a word
 	var inputTextJoined = inputText.join('');
 
-	if(myWords[arrayIndex] === inputTextJoined){
+	var n = inputTextJoined.length;
+
+	if(myWords[arrayIndex].word === inputTextJoined){
 		alert('You WON!!!');
 	}
 	else {
-		alert('You have been HANGED!!!');
+		alert("You have been HANGED!!!");
 	}
 }
